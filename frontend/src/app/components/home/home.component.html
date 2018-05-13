@@ -1,0 +1,103 @@
+<div class="row">
+  <div class="col-md-8">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Book I.D</th>
+          <th>Name</th>
+          <th>Author</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let book of books">
+        <tr>
+          <td>{{book.id}}</td>
+          <td>{{book.book_name}}</td>
+          <td>{{book.author_name}}</td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="deleteBook(book.id)">Delete</button>
+            <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModal2" (click)="showBook2(book.id)">Edit</button>
+            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal" (click)="showBook(book.id)">Show</button>
+          
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="col-md-4">
+    <form [formGroup]="appForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Book Name</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Book Name" formControlName="book_name">
+        <div class="alert alert-danger" [hidden]="!error.book_name">
+          {{error.book_name}}
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Book Name</label>
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Author Name" formControlName="author_name">
+        <div class="alert alert-danger" [hidden]="!error.author_name">
+            {{error.author_name}}
+          </div>
+      </div>
+     
+      <button type="submit" class="btn btn-primary" [disabled]="!appForm.valid">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="book1">
+    <div class="modal-dialog" role="document" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Book Information</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+         {{book1.book_name}}
+         <p>Author: {{book1.author_name}}</p>
+         <p>{{book1.created_at }}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="book1">
+    <div class="modal-dialog" role="document" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Book Information</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="appForm" (ngSubmit)="onUpdate()">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Book Name</label>
+                  <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Book Name" value="{{book1.book_name}}" formControlName="book_name">
+                 
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Author Name</label>
+                  <input type="text" class="form-control" id="updateBtn" aria-describedby="emailHelp" placeholder="Enter Author Name" value="{{book1.author_name}}" formControlName="author_name">
+                 
+                </div>
+               
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  
