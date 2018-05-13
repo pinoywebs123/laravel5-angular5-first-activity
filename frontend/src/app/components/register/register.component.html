@@ -20,6 +20,6 @@
         <input type="password" class="form-control" id="password2" formControlName="repeat_password">
       </div>
     
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="!appForm.valid">Submit</button>
     
   </form>

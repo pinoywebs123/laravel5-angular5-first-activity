@@ -1,4 +1,6 @@
-import { FormGroup, FormControl } from '@angular/forms';
+import { TokenService } from './../../services/token.service';
+import { AuthService } from './../../services/auth.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,25 +10,39 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+  
   appForm : FormGroup;
   constructor(
-    public router: Router
+    public router: Router,
+    public auth: AuthService,
+    public token: TokenService
   ) { }
 
   ngOnInit() {
     this.appForm = new FormGroup({
-      'email': new FormControl(null),
-      'password': new FormControl(null)
+      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'password': new FormControl(null, [Validators.required])
     })
+
+    
   }
 
   onSubmit(){
-    console.log(this.appForm.value);
+    this.auth.userLogin(this.appForm.value).subscribe
+    (
+      (res)=> {
+         this.handleToken(res.access_token);
+         this.auth.changeAuthStatus(true);
+         this.router.navigateByUrl('/books');
+      }
+    )
   }
 
-  onRegister(){
+  handleToken(token){
+    this.token.handle(token);
     
   }
+
+ 
 
 }

@@ -1,6 +1,7 @@
 import { BookService } from './../../services/book.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -9,6 +10,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  
   book1 : any;
   books: any;
   id : number;
@@ -25,6 +27,7 @@ export class HomeComponent implements OnInit {
     })
 
     this.displayBooks();
+    
   }
 
   onSubmit(){

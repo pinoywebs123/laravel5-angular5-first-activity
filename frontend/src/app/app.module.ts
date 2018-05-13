@@ -1,3 +1,6 @@
+import { BeforeLoginService } from './services/before-login.service';
+import { AfterLoginService } from './services/after-login.service';
+import { TokenService } from './services/token.service';
 import { AppRouterModule } from './includes/app-router/app-router.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -29,7 +32,7 @@ import { BookComponent } from './components/book/book.component';
     ReactiveFormsModule
      
   ],
-  providers: [BookService, AuthService],
+  providers: [BookService, AuthService, TokenService, AfterLoginService, BeforeLoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

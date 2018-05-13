@@ -11,10 +11,10 @@
               <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password">
             </div>
             
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button class="btn btn-info" routerLink="register">Register</button> 
+            <button type="submit" class="btn btn-primary" [disabled]="!appForm.valid">Submit</button>
+            
           </form>
-          
+          <button class="btn btn-info" routerLink="register" >Register</button> 
     </div>
     
     <div class="col-md-6">
